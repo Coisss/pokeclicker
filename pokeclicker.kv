@@ -1,0 +1,325 @@
+#:set poke_font 221/255, 55/255, 34/255
+
+<RoundedButtonColor1@Button>
+    background_color: (0,0,0,0)
+    background_normal: ''
+    canvas.before:
+        Color:
+            rgba: (200/255, 200/255, 200/255, 1)
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [18]
+
+<RoundedButtonColor2@Button>
+    background_color: (0,0,0,0)
+    background_normal: ''
+    canvas.before:
+        Color:
+            rgba: (160/255, 160/255, 160/255, 1)
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [18]
+    
+
+<MenuScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+
+        padding: 40
+        spacing: 20
+
+        canvas.before:
+            Color:
+                rgba: (100/255, 100/255, 100/255, 1)
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                source: 'background.png'
+        Image:
+            source: 'images/logo.png'
+
+            size_hint_y: 0.2
+        RoundedButtonColor1:
+            text: "Play"
+            color: 0/255, 0/255, 0/255, 1
+            font_size: '72sp'
+            # background_color: 200/255, 200/255, 200/255, 1
+            # background_normal: ''
+            bold: "true"
+            font_name: 'Montserrat-Bold.ttf'
+            size_hint_y: 0.5
+            on_press:
+                app.root.current = "game"
+                app.root.transition.direction = "left"
+        
+        BoxLayout:
+            size_hint_y: 0.3
+            spacing: 20
+            RoundedButtonColor2:
+                color: 0/255, 0/255, 0/255, 1
+                font_size: '48sp'
+                # background_color: 160/255, 160/255, 160/255, 1
+                # background_normal: ''
+                bold: "false"
+                
+                font_name: 'Montserrat-Bold.ttf'
+
+                on_press:
+                    app.root.current = "settings"
+                    app.root.transition.direction = "left"
+
+                Image:
+                    source: 'images/settings_black.png'
+                    center: self.parent.center
+
+            RoundedButtonColor2:
+                color: 0/255, 0/255, 0/255, 1
+                font_size: '40sp'
+                # background_color: 160/255, 160/255, 160/255, 1
+                # background_normal: ''
+                bold: "false"
+                font_name: 'Montserrat-Bold.ttf'
+                
+                on_press:
+                    app.root.current = "credits"
+                    app.root.transition.direction = "left"
+
+                Image:
+                    source: 'images/credits_black.png'
+                    center: self.parent.center
+
+<GameScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        BoxLayout:
+            id: header
+            size_hint_y: 0.1
+
+            
+
+            canvas:
+                Color:
+                    rgb: 255/255, 255/255, 255/255
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+
+            Label:
+                id: points_label
+
+                text: "PokeDollars: " + str(app.points)# + "       X " + str(app.number)
+                color: poke_font
+                font_name: 'Montserrat-Bold.ttf'
+                font_size: '36sp'
+        FloatLayout:
+            canvas.before:
+                Color:
+                    rgba: 255/255, 41/255, 41/255, 1
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+                    source: 'background.png'
+            ObjectGame:
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint_y: 0.1
+            Button:
+                text: "Back"
+                font_name: 'Montserrat-Bold.ttf'
+                font_size: '24sp'
+                on_press:
+                    app.root.current = 'main'
+                    app.root.transition.direction = "right"
+            Button:
+                canvas.before:
+                    Color:
+                        rgba: 240/255, 217/255, 10/255, 1
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+                color: "black"
+                font_name: 'Montserrat-Bold.ttf'
+                font_size: '28sp'
+                text: "Shop"
+                on_press:
+                    app.root.current = 'shop'
+                    app.root.transition.direction = "up"
+
+<ObjectGame>:
+    # canvas.before:
+    #     Color:
+    #         rgba: 255/255, 41/255, 41/255, 1
+    #     Rectangle:
+    #         size: self.size
+    #         pos: self.pos
+    source: app.ball
+    size_hint: None, None
+    size: '350dp', '350dp'
+    center: self.parent.center
+
+<Upgrade1>:
+        # canvas.before:
+    #     Color:
+    #         rgba: 255/255, 41/255, 41/255, 1
+    #     Rectangle:
+    #         size: self.size
+    #         pos: self.pos
+    # source: 'images/upgrade1.png'
+    # size_hint: None, None
+    # size: '350dp', '350dp'
+    background_color: (0,0,0,0)
+    background_normal: ''
+    canvas.before:
+        Color:
+            rgba: (160/255, 160/255, 160/255, 1)
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [18]
+
+    center: self.parent.center
+    text: str(root.price) + " PokeDollars умножает прибыль за клик в 2 раза"
+    font_name: 'Montserrat-Bold.ttf'
+    size_hint_y: 0.05
+    font_size: '14sp'
+
+    # bold: "true"
+
+<Upgrade2>:
+            # canvas.before:
+    #     Color:
+    #         rgba: 255/255, 41/255, 41/255, 1
+    #     Rectangle:
+    #         size: self.size
+    #         pos: self.pos
+    # source: 'images/upgrade1.png'
+    # size_hint: None, None
+    # size: '350dp', '350dp'
+
+    background_color: (0,0,0,0)
+    background_normal: ''
+    canvas.before:
+        Color:
+            rgba: (160/255, 160/255, 160/255, 1)
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [18]
+
+    center: self.parent.center
+    text: "250 pokedollars  умножает прибыль за клик в 2 раза"
+    font_name: 'Montserrat-Bold.ttf'
+    size_hint_y: 0.05
+    font_size: '14sp'
+    # bold: "true"
+
+<Upgrade3>:
+                # canvas.before:
+    #     Color:
+    #         rgba: 255/255, 41/255, 41/255, 1
+    #     Rectangle:
+    #         size: self.size
+    #         pos: self.pos
+    # source: 'images/upgrade1.png'
+    # size_hint: None, None
+    # size: '350dp', '350dp'
+
+    background_color: (0,0,0,0)
+    background_normal: ''
+    canvas.before:
+        Color:
+            rgba: (160/255, 160/255, 160/255, 1)
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [18]
+
+    center: self.parent.center
+    text: str(root.price) + " PokeDollars  пассивная прибыль +1"
+    font_name: 'Montserrat-Bold.ttf'
+    size_hint_y: 0.05
+    font_size: '14sp'
+    # bold: "true"
+
+<SettingsScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            text: "Ты думал тут что-то будет? Ооо нееет.."
+            color: "black"
+            font_size: '22sp'
+            canvas.before:
+                Color:
+                    rgba: 1, 1, 1, 1
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+        Button:
+            text: "Back"
+            size_hint_y: 0.3
+            font_size: '28sp'
+            bold: "true"
+            font_name: 'Montserrat-Bold.ttf'
+            on_press:
+                app.root.current = 'main'
+                app.root.transition.direction = "right"
+
+<ShopScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 40
+        spacing: 20
+        Upgrade1:
+        Upgrade2:
+        Upgrade3:
+        Upgrade1:
+        Upgrade1:
+        Upgrade1:
+        Upgrade1:
+
+        RoundedButtonColor1:
+            text: "Back"
+            font_name: 'Montserrat-Bold.ttf'
+            size_hint_y: 0.1
+            font_size: '28sp'
+            bold: "true"
+            on_press:
+                app.root.current = 'game'
+                app.root.transition.direction = "down"
+
+<CreditsScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            text: "здесь были дионис и ваня 11.08.2024"
+            color: "black"
+            font_size: '22sp'
+            canvas.before:
+                Color:
+                    rgba: 1, 1, 1, 1
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+        Image:
+            source: 'images/screenshot11082024.png'
+        Button:
+            text: "Back"
+            font_name: 'Montserrat-Bold.ttf'
+            size_hint_y: 0.3
+            font_size: '28sp'
+            bold: "true"
+            on_press:
+                app.root.current = 'main'
+                app.root.transition.direction = "right"
+
+<background>:
+    canvas.before:
+        Color:
+            rgba: (1,1,1,1)
+        
+        Rectangle:
+            source: "background.png" 
+            size: root.width, root.height
+            pos: self.pos
