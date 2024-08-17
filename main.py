@@ -72,6 +72,10 @@ class ObjectGame(Image):
             ...
         return super().on_touch_down(touch)
 
+# надо будет сделать такое, чтоб если можно купить улучшение -
+# кнопка будет зелёная, если нет
+# кнопка будет серая
+
 class Upgrade1(Button):
     anim_play = False
     price = NumericProperty(50)

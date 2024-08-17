@@ -22,7 +22,28 @@
             size: self.size
             pos: self.pos
             radius: [18]
-    
+            
+<RoundedButtonColor3@Button>
+    background_color: (0,0,0,0)
+    background_normal: ''
+    canvas.before:
+        Color:
+            rgba: (221/255, 55/255, 34/255, 1)
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [18]
+
+<RoundedButtonColor4@Button>
+    background_color: (0,0,0,0)
+    background_normal: ''
+    canvas.before:
+        Color:
+            rgba: (103/255, 171/255, 100/255, 1)
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [18]
 
 <MenuScreen>:
     BoxLayout:
@@ -97,8 +118,10 @@
         BoxLayout:
             id: header
             size_hint_y: 0.1
+            orientation: 'horizontal'
 
-            
+            padding: 10
+            spacing: 10
 
             canvas:
                 Color:
@@ -107,13 +130,28 @@
                     size: self.size
                     pos: self.pos
 
+            RoundedButtonColor3:
+                font_name: 'Montserrat-Bold.ttf'
+                font_size: '24sp'
+                size: 50, 50
+                size_hint: None, None
+                on_press:
+                    app.root.current = 'main'
+                    app.root.transition.direction = "right"
+
+                Image:
+                    source: 'images/arrow_left.png'
+                    center: self.parent.center
+                    width: 30
+
             Label:
                 id: points_label
 
-                text: "PokeDollars: " + str(app.points)# + "       X " + str(app.number)
+                text: "PokeDollars: " + str(app.points)
                 color: poke_font
                 font_name: 'Montserrat-Bold.ttf'
                 font_size: '36sp'
+
         FloatLayout:
             canvas.before:
                 Color:
@@ -124,25 +162,22 @@
                     source: 'background.png'
             ObjectGame:
         BoxLayout:
+            padding: 10
+            spacing: 10
+
             orientation: 'horizontal'
-            size_hint_y: 0.1
-            Button:
-                text: "Back"
+            size_hint_y: 0.15
+
+            canvas.before:
+                Color:
+                    rgba: (255/255, 255/255, 255/255, 1)
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+            RoundedButtonColor3:
                 font_name: 'Montserrat-Bold.ttf'
                 font_size: '24sp'
-                on_press:
-                    app.root.current = 'main'
-                    app.root.transition.direction = "right"
-            Button:
-                canvas.before:
-                    Color:
-                        rgba: 240/255, 217/255, 10/255, 1
-                    Rectangle:
-                        size: self.size
-                        pos: self.pos
-                color: "black"
-                font_name: 'Montserrat-Bold.ttf'
-                font_size: '28sp'
                 text: "Shop"
                 on_press:
                     app.root.current = 'shop'
@@ -181,7 +216,7 @@
             radius: [18]
 
     center: self.parent.center
-    text: str(root.price) + " PokeDollars умножает прибыль за клик в 2 раза"
+    text: str(root.price) + " PokeDollars - double x2"
     font_name: 'Montserrat-Bold.ttf'
     size_hint_y: 0.05
     font_size: '14sp'
@@ -210,7 +245,7 @@
             radius: [18]
 
     center: self.parent.center
-    text: "250 pokedollars  умножает прибыль за клик в 2 раза"
+    text: "250 test  x2"
     font_name: 'Montserrat-Bold.ttf'
     size_hint_y: 0.05
     font_size: '14sp'
@@ -238,7 +273,7 @@
             radius: [18]
 
     center: self.parent.center
-    text: str(root.price) + " PokeDollars  пассивная прибыль +1"
+    text: str(root.price) + " PokeDollars - passive income +1"
     font_name: 'Montserrat-Bold.ttf'
     size_hint_y: 0.05
     font_size: '14sp'
@@ -268,10 +303,21 @@
                 app.root.transition.direction = "right"
 
 <ShopScreen>:
+
     BoxLayout:
         orientation: 'vertical'
+
         padding: 40
         spacing: 20
+
+        canvas.before:
+            Color:
+                rgba: (100/255, 100/255, 200/255, 1)
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                source: 'background.png'
+
         Upgrade1:
         Upgrade2:
         Upgrade3:
@@ -280,7 +326,7 @@
         Upgrade1:
         Upgrade1:
 
-        RoundedButtonColor1:
+        RoundedButtonColor3:
             text: "Back"
             font_name: 'Montserrat-Bold.ttf'
             size_hint_y: 0.1
