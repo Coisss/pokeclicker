@@ -133,16 +133,19 @@
             RoundedButtonColor3:
                 font_name: 'Montserrat-Bold.ttf'
                 font_size: '24sp'
-                size: 50, 50
-                size_hint: None, None
+                size_hint_y: 1  
+                size_hint_x: None  
+                width: self.height 
                 on_press:
                     app.root.current = 'main'
                     app.root.transition.direction = "right"
 
                 Image:
                     source: 'images/arrow_left.png'
-                    center: self.parent.center
-                    width: 30
+                    size_hint: None, None
+                    size: self.parent.size
+                    center: self.parent.center  
+
 
             Label:
                 id: points_label
@@ -192,8 +195,9 @@
     #         pos: self.pos
     source: app.ball
     size_hint: None, None
-    size: '350dp', '350dp'
-    center: self.parent.center
+    width: self.parent.width * 0.6
+    height: self.width
+    pos_hint: {'center_x': 0.5, 'center_y': 0.5}
 
 <Upgrade1>:
         # canvas.before:
@@ -245,7 +249,7 @@
             radius: [18]
 
     center: self.parent.center
-    text: "250 test  x2"
+    text: "250 PokeDollars - -10% on all items"
     font_name: 'Montserrat-Bold.ttf'
     size_hint_y: 0.05
     font_size: '14sp'
