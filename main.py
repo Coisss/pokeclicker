@@ -114,11 +114,11 @@ class Upgrade3(Button):
     price = NumericProperty(50)
     def on_touch_down(self, touch):
         if self.collide_point(touch.pos[0], touch.pos[1]) and self.anim_play == False and app.points >= self.price:
-            app.number2 += 1
-            app.points -= 100
+            app.k_passive_income += 1
+            app.points -= self.price
 
             self.price *= 2
-            print(app.number2)
+            print(app.k_passive_income)
         else:
             print('No Upgrade?')
         return super().on_touch_down(touch)
@@ -127,7 +127,11 @@ class Upgrade3(Button):
 class PokeClicker(App):
     points = NumericProperty(0) 
     number = 1
-    number2 = 0
+    number2 = 1
+    k_passive_income = 0
+    k_bonus_multiplier = 1
+    bonus_income = k_passive_income * k_bonus_multiplier
+    bonus_number = number * number2
     ball = 'images/pokeball.png'
 
     def build(self):
@@ -144,7 +148,7 @@ class PokeClicker(App):
         return sm
 
     def update_points(self, dt):
-        self.points += self.number2
+        self.points += self.k_passive_income
 
 
 # Window.clearcolor = (1, 1, 1, 1)
