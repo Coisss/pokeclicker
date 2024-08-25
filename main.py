@@ -14,6 +14,7 @@ from kivy.properties import NumericProperty
 from kivy.animation import Animation
 from kivy.metrics import dp, sp
 from kivy.clock import Clock
+from kivy.lang import Builder
 import time
 
 
@@ -76,7 +77,7 @@ class ObjectGame(Image):
 # кнопка будет зелёная, если нет
 # кнопка будет серая
 
-class Upgrade1(Button):
+class DoubleClick(Button):
     anim_play = False
     price = NumericProperty(50)
     def on_touch_down(self, touch):
@@ -87,6 +88,7 @@ class Upgrade1(Button):
             app.ball = 'images/greatball.png'
 
             self.price *= 2.5
+            #round(self.price, 0)
 
             print('Upgrade!')
         else:
@@ -94,22 +96,27 @@ class Upgrade1(Button):
         return super().on_touch_down(touch)
 
 
-class Upgrade2(Button):
+class Rebirth(Button):
     anim_play = False
+    price = NumericProperty(50000)
     
     def on_touch_down(self, touch):
-        if self.collide_point(touch.pos[0], touch.pos[1]) and self.anim_play == False and app.points >= 250:
-            app.number = app.number * 2
-            app.points -= 250
-            app.ball = 'images/ultraball.png'
+        if self.collide_point(touch.pos[0], touch.pos[1]) and self.anim_play == False and app.points >= self.price:
+            app.points = 0
+            app.k_passive_income = 0
+            app.number = 1
 
-            print('Upgrade!')
+            app.rebirth_count += 1
+            self.price *= 5
+            #round(self.price)
+
+            print('Rebirth!')
         else:
-            print('No Upgrade?')
+            print('No Rebirth?')
         return super().on_touch_down(touch)
 
 
-class Upgrade3(Button):
+class Income(Button):
     anim_play = False
     price = NumericProperty(50)
     def on_touch_down(self, touch):
@@ -118,6 +125,20 @@ class Upgrade3(Button):
             app.points -= self.price
 
             self.price *= 2
+            #round(self.price)
+            print(app.k_passive_income)
+        else:
+            print('No Upgrade?')
+        return super().on_touch_down(touch)
+
+class Money(Button):
+    anim_play = False
+    price = NumericProperty(0)
+    def on_touch_down(self, touch):
+        if self.collide_point(touch.pos[0], touch.pos[1]) and self.anim_play == False and app.points >= self.price:
+            app.k_passive_income += 5000000
+            app.points -= self.price
+
             print(app.k_passive_income)
         else:
             print('No Upgrade?')
@@ -132,6 +153,7 @@ class PokeClicker(App):
     k_bonus_multiplier = 1
     bonus_income = k_passive_income * k_bonus_multiplier
     bonus_number = number * number2
+    rebirth_count = NumericProperty(0)
     ball = 'images/pokeball.png'
 
     def build(self):

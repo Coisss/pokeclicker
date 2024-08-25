@@ -1,5 +1,6 @@
 #:kivy 2.3.0
 #:set poke_font 221/255, 55/255, 34/255
+#:set rebirth_font 255/255, 255/255, 255/255
 
 <RoundedButtonColor1@Button>
     background_color: (0,0,0,0)
@@ -188,7 +189,7 @@
 
 <ObjectGame>:
     # canvas.before:
-    #     Color:
+        #     Color:
     #         rgba: 255/255, 41/255, 41/255, 1
     #     Rectangle:
     #         size: self.size
@@ -199,21 +200,21 @@
     height: self.width
     pos_hint: {'center_x': 0.5, 'center_y': 0.5}
 
-<Upgrade1>:
+<DoubleClick>:
         # canvas.before:
     #     Color:
     #         rgba: 255/255, 41/255, 41/255, 1
     #     Rectangle:
     #         size: self.size
     #         pos: self.pos
-    # source: 'images/upgrade1.png'
+    # source: 'images/DoubleClick.png'
     # size_hint: None, None
     # size: '350dp', '350dp'
     background_color: (0,0,0,0)
     background_normal: ''
     canvas.before:
         Color:
-            rgba: (160/255, 160/255, 160/255, 1)
+            rgba: (132/255, 176/255, 68/255, 1)
         RoundedRectangle:
             size: self.size
             pos: self.pos
@@ -227,14 +228,14 @@
 
     # bold: "true"
 
-<Upgrade2>:
+<Rebirth>:
             # canvas.before:
     #     Color:
     #         rgba: 255/255, 41/255, 41/255, 1
     #     Rectangle:
     #         size: self.size
     #         pos: self.pos
-    # source: 'images/upgrade1.png'
+    # source: 'images/DoubleClick.png'
     # size_hint: None, None
     # size: '350dp', '350dp'
 
@@ -242,27 +243,27 @@
     background_normal: ''
     canvas.before:
         Color:
-            rgba: (160/255, 160/255, 160/255, 1)
+            rgba: (100/255, 160/255, 230/255, 1)
         RoundedRectangle:
             size: self.size
             pos: self.pos
             radius: [18]
 
     center: self.parent.center
-    text: "250 PokeDollars - -10% on all items"
+    text: str(root.price) + " PokeDollars - Rebirth"
     font_name: 'Montserrat-Bold.ttf'
     size_hint_y: 0.05
     font_size: '14sp'
     # bold: "true"
 
-<Upgrade3>:
+<Money>:
                 # canvas.before:
     #     Color:
     #         rgba: 255/255, 41/255, 41/255, 1
     #     Rectangle:
     #         size: self.size
     #         pos: self.pos
-    # source: 'images/upgrade1.png'
+    # source: 'images/DoubleClick.png'
     # size_hint: None, None
     # size: '350dp', '350dp'
 
@@ -270,7 +271,35 @@
     background_normal: ''
     canvas.before:
         Color:
-            rgba: (160/255, 160/255, 160/255, 1)
+            rgba: (0/255, 255/255, 100/255, 1)
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [18]
+
+    center: self.parent.center
+    text: str(root.price) + " PokeDollars - Rebirth"
+    font_name: 'Montserrat-Bold.ttf'
+    size_hint_y: 0.05
+    font_size: '14sp'
+    # bold: "true"
+
+<Income>:
+                # canvas.before:
+    #     Color:
+    #         rgba: 255/255, 41/255, 41/255, 1
+    #     Rectangle:
+    #         size: self.size
+    #         pos: self.pos
+    # source: 'images/DoubleClick.png'
+    # size_hint: None, None
+    # size: '350dp', '350dp'
+
+    background_color: (0,0,0,0)
+    background_normal: ''
+    canvas.before:
+        Color:
+            rgba: (152/255, 75/255, 176/255, 1)
         RoundedRectangle:
             size: self.size
             pos: self.pos
@@ -307,12 +336,13 @@
                 app.root.transition.direction = "right"
 
 <ShopScreen>:
-
+    
     BoxLayout:
         orientation: 'vertical'
 
         padding: 40
         spacing: 20
+
 
         canvas.before:
             Color:
@@ -321,14 +351,27 @@
                 pos: self.pos
                 size: self.size
                 source: 'background.png'
+        
+        BoxLayout:
+            id: header
+            size_hint_y: 0.025
+            orientation: 'horizontal'
 
-        Upgrade1:
-        Upgrade2:
-        Upgrade3:
-        Upgrade1:
-        Upgrade1:
-        Upgrade1:
-        Upgrade1:
+            padding: 10
+            spacing: 10
+            
+            Label:
+                text: "Rebirths: " + str(app.rebirth_count)
+                color: rebirth_font
+                font_name: 'Montserrat-Bold.ttf'
+                font_size: '36sp'
+                center: self.parent.center
+                size_hint_y: 0.025
+
+        DoubleClick:
+        Income:
+        Rebirth:
+        #Money:
 
         RoundedButtonColor3:
             text: "Back"
