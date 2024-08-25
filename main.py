@@ -87,7 +87,7 @@ class DoubleClick(Button):
             app.points -= self.price
             app.ball = 'images/greatball.png'
 
-            self.price *= 2.5
+            self.price *= 2
             #round(self.price, 0)
 
             print('Upgrade!')
@@ -98,7 +98,7 @@ class DoubleClick(Button):
 
 class Rebirth(Button):
     anim_play = False
-    price = NumericProperty(50000)
+    price = NumericProperty(10000)
     
     def on_touch_down(self, touch):
         if self.collide_point(touch.pos[0], touch.pos[1]) and self.anim_play == False and app.points >= self.price:
@@ -107,7 +107,7 @@ class Rebirth(Button):
             app.number = 1
 
             app.rebirth_count += 1
-            self.price *= 5
+            self.price *= 3
             #round(self.price)
 
             print('Rebirth!')
@@ -118,7 +118,7 @@ class Rebirth(Button):
 
 class Income(Button):
     anim_play = False
-    price = NumericProperty(50)
+    price = NumericProperty(10)
     def on_touch_down(self, touch):
         if self.collide_point(touch.pos[0], touch.pos[1]) and self.anim_play == False and app.points >= self.price:
             app.k_passive_income += 1
