@@ -16,7 +16,7 @@ from kivy.metrics import dp, sp
 from kivy.clock import Clock
 from kivy.lang import Builder
 import time
-
+print('hello world')
 
 class MenuScreen(Screen):
     def test(self):
